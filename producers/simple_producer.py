@@ -39,7 +39,7 @@ class SimpleProducer:
                 sys.stderr.write('%% Local producer queue is full (%d messages awaiting delivery): try again\n' %
                                  len(self.producer))
 
-            # Serve delivery callback queue.
+            # Serve delivery callback queue.    
             # NOTE: Since produce() is an asynchronous API this poll() call
             #       will most likely not serve the delivery callback for the
             #       last produce()d message.
@@ -53,5 +53,5 @@ class SimpleProducer:
 
 
 if __name__ == '__main__':
-    simple_producer = SimpleProducer(topic='lesson.ch5-1.simple.producer', duration=60)
+    simple_producer = SimpleProducer(topic='lesson.ch5-1.simple.producer', duration=60) # topic: 전송할 토픽명 duration: 몇 초동안 보낼 것인지
     simple_producer.produce()
