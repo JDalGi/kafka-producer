@@ -19,9 +19,15 @@ file_exists_behavior: OVERWRITE
 # pattern, except 키워드를 통해 대상 상세지정 가능
 permissions:
   - object: /src/kafka-producer
-    owner: ubuntu
-    group: ubuntu
+    owner: kafka
+    group: kafka
     mode: 755
 
 
 # hooks 를 통해 before/after 동작 수행 가능
+# Code Deploy가 코드를 배포하기 전이나 후에 어떤 추가적인 액션을 지정해줄 필요가 있을 때 기능 제공
+hooks:
+  AfterInstall: # 코드 배포가 이루어지고 난 후에 어떤 액션을 할 수 있도록 설정
+    - location: deploy/after_install.sh # 코드 배포가 이루어지고 해야할 액션을 해당 파일에 정의
+      timeout: 120 # 120초 초과 시 에러 처리
+      runas: kafka # kafka 유저로 실행
